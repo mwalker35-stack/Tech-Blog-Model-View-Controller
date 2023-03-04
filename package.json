@@ -1,0 +1,30 @@
+{
+  "name": "tech-blog-model-view-controller",
+  "version": "1.0.0",
+  "description": "AS A developer who writes about tech I WANT a CMS-style blog site SO THAT I can publish articles, blog posts, and my thoughts and opinions",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwalker35-stack/Tech-Blog-Model-View-Controller.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mwalker35-stack/Tech-Blog-Model-View-Controller/issues"
+  },
+  "homepage": "https://github.com/mwalker35-stack/Tech-Blog-Model-View-Controller#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "connect-session-sequelize": "^7.1.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.1",
+    "express-session": "^1.17.3",
+    "mysql2": "^3.2.0",
+    "sequelize": "^6.29.0"
+  }
+}
