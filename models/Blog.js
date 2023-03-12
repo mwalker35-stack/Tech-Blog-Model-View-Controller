@@ -20,8 +20,7 @@ Blog.init(
     },
     title: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,      
+      allowNull: false,     
     },
     content: {
       type: DataTypes.STRING,

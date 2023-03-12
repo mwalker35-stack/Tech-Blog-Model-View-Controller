@@ -1,0 +1,27 @@
+:root {
+    --main-bg-color: rgb(44, 19, 19);
+    --text-color: rgb(143, 243, 210);
+}
+
+
+#headerlinks {
+display: flex;
+flex-direction: row;
+flex-wrap:wrap;
+align-items: center;
+justify-content: space-around;
+background-color: var(--main-bg-color);
+color: var(--text-color);
+flex-shrink: 5;
+}
+
+#blog{
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 12px;
+    border-color: red;
+    margin: 6rem;
+    font-size: 6rem;
+}
+
+

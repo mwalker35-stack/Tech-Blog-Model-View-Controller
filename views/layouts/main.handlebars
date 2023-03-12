@@ -4,20 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/public/css/jass.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <title>Tech Blog 101</title>
 </head>
-<ul class="nav">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Dashboard</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Logout</a>
-  </li>
-</ul>
+<div>
+    <h2>
+        <div id="headerlinks" >
+            <div>
+                <h1 id="blog">
+                    The Tech Blog
+                </h1>
+            </div>
+            <div>
+                Home
+            </div>
+            <div>
+                Dashboard
+            </div>
+            <div>
+                      <!-- Conditionally render login or logout links -->
+        {{#if logged_in}}
+        <a href="/public/js/profile.js">profile</a> |
+        <button class="no-button" id="logout">logout</button>
+        {{else}}
+        <a href="/public/js/login.js">login</a>
+        {{/if}}
+            </div>
+        </div>
+        
+    </h2>
+
+</div>
 <body>
-    
+    <main class="container container-fluid mt-5">
+        <!-- Render the sub layout -->
+        {{{ body }}}
 </body>
 </html>
