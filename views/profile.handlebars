@@ -1,0 +1,42 @@
+{{#each blogs as |blog|}}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title"> {{blog.title}}</h5>
+        {{!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> --}}
+        <p class="card-text">
+            {{blog.content}}
+        <div class="card">
+            <div class="card-body">
+                {{blog.content}}
+                {{comment.comment_text}}
+            </div>
+            <footer class="blockquote-footer">{{blog.date_created}}<cite title="Source Title">{{blog.user_id}}</cite></footer>
+        </div>
+        </p>
+        <a href="#" id="addComment" class="card-link">Add Comment</a>
+        <a href="#" id="deleteComment" class="card-link">Delete Comment</a>
+    </div>
+</div>
+{{/each}}
+
+
+
+
+
+{{!-- <div class="addcomment">
+<div class="delete-comm">
+<h1>Hi, {{name}}</h1>
+<h1>Users Current Listed Items</h1>
+{{#if blog.length}}
+{{#each blogs}}
+{{!-- <h1>Users Current Listed Items</h1> --}}
+<h2><a class="links" href="/product/{{blog_id}}">{{blog.title}}</a></h2>
+ <button class="btn btn-sm btn-danger delete-prod" data-id="{{blog_id}}">DELETE</button>
+{{/each}}
+
+{{else}}
+<p>this user has no listed items</p>
+{{/if}}
+</div> --}}
+
+{{!-- <h2>{{product_name}}</h2> --}}

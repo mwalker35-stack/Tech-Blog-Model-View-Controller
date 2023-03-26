@@ -24,4 +24,14 @@ flex-shrink: 5;
     font-size: 6rem;
 }
 
+#header{
+    background: aqua;
+}
+
+h1{
+    background-color: rgb(235, 11, 59);
+    display: flexbox;
+    
+}
+
 

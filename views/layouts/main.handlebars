@@ -1,44 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/jass.css">
-    <link rel="stylesheet" href="/public/css/style.css">
-    <title>Tech Blog 101</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- Include Handlebars from a CDN -->
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script>
+  // compile the template
+  var template = Handlebars.compile("Handlebars <b>{{doesWhat}}</b>");
+  // execute the compiled template and print the output to the console
+  console.log(template({ doesWhat: "rocks!" }));
+</script>
+    <link href="/css/jass.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <title>Dev Talk Social</title>
 </head>
-<div>
-    <h2>
-        <div id="headerlinks" >
-            <div>
-                <h1 id="blog">
-                    The Tech Blog
-                </h1>
-            </div>
-            <div>
-                Home
-            </div>
-            <div>
-                Dashboard
-            </div>
-            <div>
-                      <!-- Conditionally render login or logout links -->
-        {{#if logged_in}}
-        <a href="/public/js/profile.js">profile</a> |
-        <button class="no-button" id="logout">logout</button>
-        {{else}}
-        <a href="/public/js/login.js">login</a>
-        {{/if}}
-            </div>
-        </div>
-        
-    </h2>
 
-</div>
 <body>
+    <header id="header">
+        <h1>Let's Talk Tech</h1>
+        <nav>
+            <!-- Conditionally render login or logout links -->
+            {{#if logged_in}}
+            <a href="/">Home</a> |
+            <a href="/createblog">Dashboard</a>
+            <a href='/' id="logout">Logout</a>|
+
+          
+            {{else}}
+            <a href="/login">Login</a>
+            <a href="/">Home</a>
+            <a href="/createblog">Dashboard</a>
+            {{/if}}
+        </nav>
+    </header>
+    <div id="bloghead">
+        {{#if blog.length}}
+        <div>
+        <h2>Current Blogs</h2>
+        {{#each blogs}}
+            <div class="row mb-2">
+      <div class="col-md-8">
+        <h3><a href="/blog/{{blog.id}}">{{blog.title}}</a></h3>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-sm btn-danger" data-id="{{blog.id}}">DELETE</button>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+    </div>
+
+        </div>
+    </div>
     <main class="container container-fluid mt-5">
         <!-- Render the sub layout -->
-        {{{ body }}}
+        {{{body}}}
+    </main>
+    <footer>
+
+    </footer>
+    {{#if logged_in}}
+    <script src="/js/logout.js"></script>
+    {{/if}}
 </body>
+
 </html>

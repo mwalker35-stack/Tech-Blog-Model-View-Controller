@@ -1,0 +1,21 @@
+{{#each blogs as |blog|}}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title"> {{blog.title}}</h5>
+        <h4>Created By: {{user.username}}</h4>
+        {{!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> --}}
+        <p class="card-text">
+            {{blog.content}}
+        <div class="card">
+            <div class="card-body">
+                {{blog.content}}
+                {{comment.comment_text}}
+            </div>
+            <footer class="blockquote-footer">{{date_created}}<cite title="Source Title">{{user.username}}</cite></footer>
+        </div>
+        </p>
+        <a href="addcomment.handlebars" id="addComment" class="card-link">Add Comment</a>
+        <a href="/delete" id="deleteComment" class="card-link">Delete Comment</a>
+    </div>
+</div>
+{{/each}}

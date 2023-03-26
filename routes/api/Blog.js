@@ -7,7 +7,9 @@ const withAuth = require('../../server')
 router.post('/', async(req, res) => {
     //get all blogs
     try {
-        const newBlog = await Post.create({
+
+        console.log(req.body)
+        const newBlog = await Blog.create({
             ...req.body,
             user_id: req.session.user_test,
             // include: [{model: Comment}]
@@ -15,6 +17,7 @@ router.post('/', async(req, res) => {
         console.log(newBlog)
         res.status(200).json(newBlog)
     } catch (err){
+        console.log(err)
         res.status(500).json(err)
     }
 });
