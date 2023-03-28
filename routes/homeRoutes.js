@@ -22,9 +22,42 @@ router.get('/login', async(req, res) => {
     res.render('login')
 })
 
-router.get('/blog', async(req, res) => {
-    res.render('blog')
+router.get('/blog/:id', async(req, res) => {
+    try {
+        const blogData = await Blog.findByPk(req.params.id, {
+            attributes: [
+                'id',
+                'title',
+                'content',
+                'date_created',
+                'user_id'
+            ],
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'username', 'email']
+                },
+                {
+                    model: Comment,
+                    attributes: ['id', 'comment_text', 'date_created', 'blog_id', 'user_id'],
+                    include: {
+                        model: User,
+                        attributes: ['id', 'username', 'email']
+                    }
+                }
+            ]
+        })
+        const blog = blogData.get({ plain: true })
+        res.render('blog', {
+            ...blog,
+            logged_in: true
+        })
+    } catch(err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
 })
+
 
 router.get('/editcomment', async(req, res) => {
     res.render('editcomment')
@@ -38,8 +71,9 @@ router.get('/addcomment', async(req, res) => {
     res.render('addcomment')
 })
 
-router.get('/addcomment', async(req, res) => {
-    res.render('addcomment')
+
+router.get('/username', async(req, res) => {
+    res.render("profile")
 })
 
 

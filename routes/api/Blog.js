@@ -4,6 +4,15 @@ const withAuth = require('../../server')
 
 // The '/api/blog'   endpoint
 
+router.get('/', async(req, res) => {
+    try {
+        let blogs =Blog.findAll()
+        res.status(200).json({blogs})
+    } catch (err){
+        console.log(err)
+    }
+})
+
 router.post('/', async(req, res) => {
     //get all blogs
     try {
