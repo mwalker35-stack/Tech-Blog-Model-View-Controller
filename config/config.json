@@ -1,0 +1,14 @@
+{
+    "production": {
+        "use_env_variable": "JAWSDB_URL",
+        "dialect": "mysql"
+    },
+    "development": {
+        "username": "root",
+        "password": "Armyusmc01",
+        "database": "techblog_db",
+        "host": "localhost",
+        "dialect": "mysql"
+    }
+  
+}

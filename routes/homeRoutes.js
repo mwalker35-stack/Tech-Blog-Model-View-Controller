@@ -12,17 +12,17 @@ router.get('/', async (req, res) => {
         ]
     })
     const blogs = await techBlogData.map(blog => {
-        return blog.get({plain: true})
+        return blog.get({ plain: true })
     })
     console.log(blogs)
-    res.render("homepage", {blogs, logged_in: req.session?req.session.logged_in:false})
+    res.render("homepage", { blogs, logged_in: req.session ? req.session.logged_in : false })
 })
 
-router.get('/login', async(req, res) => {
+router.get('/login', async (req, res) => {
     res.render('login')
 })
 
-router.get('/blog/:id', async(req, res) => {
+router.get('/blog/:id', async (req, res) => {
     try {
         const blogData = await Blog.findByPk(req.params.id, {
             attributes: [
@@ -49,49 +49,81 @@ router.get('/blog/:id', async(req, res) => {
         })
         const blog = blogData.get({ plain: true })
         res.render('blog', {
-            ...blog,
+            blog,
             logged_in: true
         })
-    } catch(err) {
+    } catch (err) {
         console.log(err)
         res.status(500).json(err)
     }
 })
 
 
-router.get('/editcomment', async(req, res) => {
-    res.render('editcomment')
+router.get('/editcomment', async (req, res) => {
+    try {
+        const blogData = await Comment.findByPk(req.params.id, {
+            attributes: [
+                'id',
+                'title',
+                'content',
+                'date_created',
+                'user_id'
+            ],
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'username', 'email']
+                },
+                {
+                    model: blog,
+                    attributes: ['id', 'title', 'date_created', 'content', 'date_created', 'user_id'],
+                    include: {
+                        model: User,
+                        attributes: ['id', 'username', 'email']
+                    }
+                }
+            ]
+        })
+        const blog = blogData.get({ plain: true })
+        res.render('editcomment', {
+            comment,
+            logged_in: true
+        })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
 })
 
-router.get('/createblog', async(req, res) => {
+router.get('/createblog', async (req, res) => {
     res.render('createblog')
 })
 
-router.get('/addcomment', async(req, res) => {
+router.get('/addcomment', async (req, res) => {
     res.render('addcomment')
 })
 
 
-router.get('/username', async(req, res) => {
+router.get('/username', async (req, res) => {
     res.render("profile")
 })
 
 
-router.get('/addcomment', async(req, rest) => {
+router.get('/addcomment', async (req, rest) => {
     try {
         const userData = await User.findByPk(req.session.user_id, {
-            attributes: { exclude: ['password']},
-            include: [{model: Blog, attributes: ['id', 'comment_text', 'date_created', 'blog_id', 'user_id']}],
+            attributes: { exclude: ['password'] },
+            include: [{ model: Blog, attributes: ['id', 'comment_text', 'date_created', 'blog_id', 'user_id'] }],
         })
 
         const user = userData.get({ plain: true })
         //console.log(user)
         res.render('addcomment', {
-            ...user,
+            user,
             logged_in: true
         })
         //res.render('createpost')
-    } catch(err) {
+    } catch (err) {
         console.log(err)
         res.status(500).json(err)
     }
