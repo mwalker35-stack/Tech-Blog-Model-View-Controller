@@ -19,22 +19,22 @@
         <div class="form-group">
           <button id="submitbtn" class="btn btn-primary">Publish</button>
         </div>
-        {{!--
-      </form> --}}
+        
+      {{!-- </form>  --}}
     </div>
 
  {{#if blogs.length}}
   <div class="col-md-6 post-list">
     <h3>Current Blogs:</h3>
-
-    {{#each blogs }}
+{{#each blogs as |blog|}}
+    {{!-- {{#each blogs }} --}}
     <div class="row mb-2">
       <div class="col-md-8">
         <h4><a href="/blog/{{id}}">{{blog.title}}</a></h4>
       </div>
       <div class="col-md-4">
         <button class="btn btn-sm btn-danger" data-id="{{id}}">DELETE</button>
-        {{!-- <div class="update-post"><button class="btn btn-sm btn-danger" data-id="{{id}}">UPDATE</button></div> --}}
+        <div class="update-post"><button class="btn btn-sm btn-danger" data-id="{{id}}">UPDATE</button></div>
 
       </div>
     </div>

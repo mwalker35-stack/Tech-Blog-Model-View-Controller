@@ -4,7 +4,7 @@ const updateBtnHandler = async (event) => {
     if(event.target.hasAttribute('data-id')) {
       const id = event.target.getAttribute('data-id')
 
-      const response = await fetch(`/api/blogs/${id}`,{
+      const response = await fetch(`/api/blog/${id}`,{
         method:'PUT',
         body: JSON.stringify({
           title,
@@ -22,6 +22,4 @@ const updateBtnHandler = async (event) => {
     }
   }
 
-  document
-  .querySelector('.update-blog')
-  .addEventListener('click', updateBtnHandler)
+  document.querySelector('.update-blog').addEventListener('click', updateBtnHandler)

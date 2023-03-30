@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const { Blog, Comment, User } = require('../../models')
-const withAuth = require('../../server')
+const withAuth = require('../../utils/auth')
 
 // The '/api/blog'   endpoint
 
 router.get('/', async(req, res) => {
     try {
-        let blogs =Blog.findAll()
+        let blogs = Blog.findAll()
         res.status(200).json({blogs})
     } catch (err){
         console.log(err)
@@ -32,7 +32,7 @@ router.post('/', async(req, res) => {
 });
 
 // DELETE A BLOG
-router.delete('/:id', async(req, res) => {
+router.delete('/:id', withAuth, async(req, res) => {
     try {
         // console.log('PARAMS', req.params.id)
         const postData =await Post.destroy({
@@ -80,13 +80,31 @@ router.post('/addcomment/:id', async(req, res) => {
             ...req.body,
             user_cid: req.session.user_test,
             post_id: req.params.id
-            // title: req.session.title,
-            // post: req.session.post
+        
         })
-        console.log(newCommment)
         res.status(200).json(newComment)
     } catch(err) {
         console.log(err)
+        res.status(500).json(err)
+    }
+})
+
+router.put('/:id', withAuth, async(req, res) => {
+    try {
+        const blogData = await Blog.update({
+            title: req.body.title,
+            post: req.body.post
+        },{
+            where: {
+                id: req.params.id
+            }
+        })
+        if(!blogData){
+            res.status(404).json({message: 'No post from user'})
+            return
+        }
+        res.status(200).json(postData)
+    } catch (err) {
         res.status(500).json(err)
     }
 })

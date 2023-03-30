@@ -16,7 +16,7 @@ const users = await User.bulkCreate(userData, {
 
 for (const blog of blogData) {
     await Blog.create({
-        ...blog,
+        blog,
         user_id: users[Math.floor(Math.random() * users.length)].id,
     })
 }
