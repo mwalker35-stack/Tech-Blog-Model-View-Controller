@@ -7,6 +7,7 @@ router.post('/', async(req, res) => {
         req.session.save(()=> {
             req.session.user_test =newUser.id
             req.session.user_id = newUser.user_id
+            req.session.logged_in = true
             res.status(200).json(newUser)
         })
     } catch(err) {
@@ -34,7 +35,7 @@ router.post('/login', async(req, res) => {
             req.session.logged_in = true
             console.log(req.session)
             res.json({user: newUser, message: 'You are logged in!'})
-        })
+        });
 
     } catch (err) {
         res.status(500).json(err)

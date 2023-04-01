@@ -15,7 +15,7 @@ const loginFormHandler = async (event) => {
   
       if (response.ok) {
         // If successful, redirect the browser to the profile page
-        document.location.replace('/');
+        document.location.replace('/createblog'); 
       } else {
         alert(response.statusText);
         console.log('Failed to log in')
@@ -31,14 +31,14 @@ const loginFormHandler = async (event) => {
     const password = document.querySelector('#password-signup').value.trim();
   
     if (name && email && password) {
-      const response = await fetch('/api/user', {
+      const response = await fetch('/api/user', { 
         method: 'POST',
         body: JSON.stringify({ name, email, password }),
         headers: { 'Content-Type': 'application/json' },
       });
   
       if (response.ok) {
-        document.location.replace('/createblog');
+        document.location.replace('/createblog'); 
       } else {
         alert(response.statusText);
       }

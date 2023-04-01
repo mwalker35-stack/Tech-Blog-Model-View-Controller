@@ -27,7 +27,11 @@ router.get('/', async (req, res) => {
     res.render("homepage", { blogs, logged_in: req.session ? req.session.logged_in : false })
 })
 
-router.get('/login', async (req, res) => {
+router.get('/login', async(req, res) => {
+    if(req.session.logged_in){
+        res.redirect('/createblog')
+        return
+    }
     res.render('login')
 })
 
@@ -132,20 +136,36 @@ router.get('/createblog', withAuth, async(req, res) => {
 
 
 
-router.get('/username', async (req, res) => {
-    res.render("profile")
-})
+// router.get('/username', async (req, res) => {
+//     res.render("profile")
+// })
 
 // router.get('/addcomment', async (req, res) => {
 //     res.render('addcomment')
 // })
 
 
-router.get('/addcomment', async (req, rest) => {
+router.get('/addcomment/:id', async (req, rest) => {
     try {
-        const userData = await User.findByPk(req.session.user_id, {
+        const commentData = await User.findByPk(req.session.user_id, {
             attributes: { exclude: ['password'] },
-            include: [{ model: Blog, attributes: ['id', 'comment_text', 'date_created', 'blog_id', 'user_id'] }],
+            include: [{ model: Blog, attributes: ['id', 'comment_text', 'date_created', 'blog_id'],
+        include: [
+            {
+                model: User,
+                attributes:['id', 'username', 'email']
+            },
+            {
+                model: Blog,
+                attributes: ['id', 'title', 'content', 'date_created', 'user_id'],
+                include: {
+                    model: User,
+                    attributes: ['id', 'username', 'email'],
+                    model: Comment,
+                    attributes: ['id', 'comment_text', 'blog_id', 'user_id', 'created_at']
+                }
+            }
+        ] }],
         })
 
         const user = userData.get({ plain: true })
@@ -154,7 +174,7 @@ router.get('/addcomment', async (req, rest) => {
             ...comment,
             logged_in: req.session.logged_in
         })
-        //res.render('createpost')
+        //res.render('createblog')
     } catch (err) {
         console.log(err)
         res.status(500).json(err)

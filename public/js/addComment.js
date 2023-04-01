@@ -1,8 +1,8 @@
-const addComHandler = async(event) => {
+const addCommentHandler = async(event) => {
     event.preventDefault()
 
 
-const comment_text = document.querySelector('.addCommment').value.trim();
+const comment_text = document.querySelector('.addComment').value.trim();
 const id = document.querySelector('.btn').getAttribute('data-id')
 
 if (comment_text) {
@@ -19,11 +19,9 @@ if (comment_text) {
     if (response.ok) {
       document.location.replace('/');
     } else {
-      alert('Failed to add comment');
+      alert('No comment added');
     }
   }
 }
 
- document
- .querySelector('.addComment')
- .addEventListener('submit', addComHandler)
+ document .querySelector('.addComment').addEventListener('submit', addCommentHandler)

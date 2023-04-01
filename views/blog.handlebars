@@ -32,31 +32,22 @@
         {{#each comment_text}}
     <p>Comments:{{comment_text}}by:{{username}}</p>
     <p>{{date_created}}</p>
-    {{!-- <div class="add-comment"><a href="/addcomment/{{post_id}}"><button class="btn btn-sm btn-danger"
-                data-id="{{post_id}}">ADD COMMENT</button></a></div> --}}
+   
     <div class="edit-comment"><a href="/editcomment/{{id}}"><button class="btn btn-sm btn-danger" data-id="{{id}}">EDIT
                 COMMENT</button></a></div>
-    {{!-- <form class="delCom">
-        <div class="delete-comment"><button type="submit" class="btn btn-sm btn-danger" data-id="{{id}}">DELETE
-                COMMENT</button></div>
-    </form> --}}
-    {{!-- <form class="delCom"><button type="submit" class="btn btn-sm btn-danger" id="deletebtn"
-            data-id="{{id}}">DELETE COMMENT</button></form> --}}
+  
     <form id="delCom" data-id="{{id}}"><button type="submit" class="btn btn-sm btn-danger" id="deletebtn"
             data-id="{{id}}">DELETE COMMENT</button></form>
 
  
     {{/each}}
     </p>
-    {{!-- {{#if comment <= 0}} <div class="add-comment"><a href="/addcomment/{{post_id}}"><button
-                class="btn btn-sm btn-danger" data-id="{{post_id}}">ADD COMMENT</button></a>
-</div>
-{{/if}} --}}
-<div class="add-comment"><a href="/addcomment/{{id}}"><button class="btn btn-sm btn-danger" data-id="{{id}}">ADD
+  
+<div class="add-comment"><a href="/addcomment/{{id}}"><button class="btn btn-sm btn-success" data-id="{{id}}">ADD
             COMMENT</button></a></div>
 
 
-<div class="update-post"><a href="/editpost/{{id}}"><button class="btn btn-sm btn-danger"
+<div class="update-post"><a href="/editpost/{{id}}"><button class="btn btn-sm btn-success"
             data-id="{{id}}">UPDATE</button></a></div>
 </div>
 {{else}}
@@ -70,4 +61,4 @@
 {{/if}}
 
 
-<script src="/js/delCom.js"></script>
+<script src="/js/deleteComment.js"></script>
